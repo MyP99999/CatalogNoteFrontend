@@ -60,6 +60,7 @@ const NotePage = () => {
                         <select
                             id="studentId"
                             value={selectedStudentId}
+                            required
                             onChange={(e) => setSelectedStudentId(e.target.value)}
                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         >
@@ -78,6 +79,7 @@ const NotePage = () => {
                         <input
                             type="text"
                             id="subject"
+                            required
                             value={subject}
                             onChange={(e) => setSubject(e.target.value)}
                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -91,6 +93,7 @@ const NotePage = () => {
                         <input
                             type="number"
                             id="grade"
+                            required
                             value={grade}
                             onChange={(e) => setGrade(e.target.value)}
                             className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-1"
