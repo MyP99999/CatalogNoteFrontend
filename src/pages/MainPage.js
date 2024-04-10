@@ -112,7 +112,7 @@ const MainPage = () => {
                                     <tr key={grade.grade_id}>
                                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                             <p className="text-gray-900 whitespace-no-wrap">
-                                            {grade.student ? grade.student.name : 'N/A'} {/* Adjusted to show student name */}
+                                                {grade.student ? grade.student.name : 'N/A'} {/* Adjusted to show student name */}
                                             </p>
                                         </td>
                                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -128,6 +128,47 @@ const MainPage = () => {
                                         </td>
                                     </tr>
                                 ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            )}
+            {/* For student */}
+            {user && user.role.role_name === 'student' && (
+                <div className="py-8 px-4 lg:px-8">
+                    <h2 className="text-2xl font-semibold text-gray-800 mb-6">My Grades</h2>
+                    <div className="bg-white shadow-md rounded-lg overflow-hidden">
+                        <table className="min-w-full leading-normal">
+                            <thead>
+                                <tr>
+                                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                        Subject
+                                    </th>
+                                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                        Grade
+                                    </th>
+                                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                        Date Added
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {grades.filter(grade => grade.student && grade.student.user_id === user.user_id).map((grade) => (
+                                    <tr key={grade.grade_id}>
+                                        <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <p className="text-gray-900 whitespace-no-wrap">{grade.subject}</p>
+                                        </td>
+                                        <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <p className="text-gray-900 whitespace-no-wrap">{grade.value}</p>
+                                        </td>
+                                        <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <p className="text-gray-900 whitespace-no-wrap">
+                                                {grade.date_added ? new Date(grade.date_added).toLocaleDateString() : 'N/A'}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                ))}
+
                             </tbody>
                         </table>
                     </div>
