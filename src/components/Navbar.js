@@ -23,8 +23,10 @@ const Navbar = ({ user, logout }) => {
                 )}
                 {user.role.role_name === 'teacher' && (
                     <div>
+                    <Link to='/note'>
                         <h2>Note a student</h2>
-                    </div>
+                    </Link>
+                </div>
                 )}
                 <button className='bg-red-500 p-4 rounded-md' onClick={logout}>Sign Out</button>
             </div>
