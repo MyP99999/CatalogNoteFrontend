@@ -35,6 +35,20 @@ const MainPage = () => {
             // Handle error (e.g., show an error message)
         }
     };
+
+    const deleteGrade = async (gradeId) => {
+        const confirmed = window.confirm("Are you sure you want to delete this grade?");
+        if (!confirmed) return;
+
+        try {
+            await axios.delete(`http://localhost:8081/grades/${gradeId}`);
+            setGrades(grades.filter((grade) => grade.grade_id !== gradeId));
+        } catch (error) {
+            console.error('Error deleting grade:', error);
+            // Handle error (e.g., show an error message)
+        }
+    };
+
     return (
         <div className="min-h-screen bg-gray-100">
             <Navbar user={user} logout={logout} />
@@ -105,6 +119,9 @@ const MainPage = () => {
                                     <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                         Date Added
                                     </th>
+                                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                        Actions
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -125,6 +142,14 @@ const MainPage = () => {
                                             <p className="text-gray-900 whitespace-no-wrap">
                                                 {grade.date_added ? new Date(grade.date_added).toLocaleDateString() : 'N/A'}
                                             </p>
+                                        </td>
+                                        <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <button
+                                                onClick={() => deleteGrade(grade.grade_id)}
+                                                className="text-red-600 hover:text-red-900"
+                                            >
+                                                Delete 
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}
